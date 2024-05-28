@@ -5,6 +5,10 @@ Motor::Motor(int pwmChannel, int in1, int in2, int pwm, int encoderA, int encode
 
 Motor::Motor(int pwmChannel, int in1, int in2, int pwm) : pwmChannel(pwmChannel), IN1Pin(in1), IN2Pin(in2), PWMPin(pwm), encoderPinA(-1), encoderPinB(-1), ticksPerRevolution(-1) {}
 
+Motor::Motor(int pwmChannel, int in1, int in2, int pwm, int minPwmValue, int encoderA, int encoderB, int ticksPerRevolution) : pwmChannel(pwmChannel), IN1Pin(in1), IN2Pin(in2), PWMPin(pwm), minPwmValue(minPwmValue), encoderPinA(encoderA), encoderPinB(encoderB), ticksPerRevolution(ticksPerRevolution) {}
+
+Motor::Motor(int pwmChannel, int in1, int in2, int pwm, int minPwmValue) : pwmChannel(pwmChannel), IN1Pin(in1), IN2Pin(in2), PWMPin(pwm), minPwmValue(minPwmValue), encoderPinA(-1), encoderPinB(-1), ticksPerRevolution(-1) {}
+
 void IRAM_ATTR Motor::encoderISR()
 {
 	if (digitalRead(encoderPinA) > digitalRead(encoderPinB))

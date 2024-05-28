@@ -1,6 +1,6 @@
 {
 	"name": "ESP32Motor",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Simple Motor control library for esp32. Supports LN298n, TB6612FNG and similar boards.",
 	"repository": {
 		"type": "git",

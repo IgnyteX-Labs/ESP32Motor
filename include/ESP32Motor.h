@@ -9,8 +9,9 @@
  */
 class Motor {
 private:
-	const int IN1Pin, IN2Pin, PWMPin;
 	const int pwmChannel;
+	const int IN1Pin, IN2Pin, PWMPin;
+	const int minPwmValue = 0;
 	const int encoderPinA, encoderPinB, ticksPerRevolution;
 	volatile long encoderCount = 0;
 	int motorAngleZero = 0;
@@ -31,6 +32,20 @@ public:
 	Motor(int pwmChannel, int in1, int in2, int pwm, int encoderA, int encoderB, int ticksPerRevolution);
 
 	/**
+	 * @brief Construct a new Motor object with encoder
+	 *
+	 * @param pwmChannel 0-15 Specifies the ledc channel used, has to be unique for every Motor object
+	 * @param in1 GPIO Pin connected to IN1 on the Driver
+	 * @param in2 GPIO Pin connected to IN2 on the Driver
+	 * @param pwm GPIO Pin connected to PWM/EN/Enable on the Driver
+	 * @param encoderA GPIO Pin connected to the A pin of the encoder on the motor
+	 * @param encoderB GPIO Pin connected to the B pin of the encoder on the motor
+	 * @param ticksPerRevolution Number of encoder ticks for one full revolution
+	 * @param minPwmValue The minimum pwm duty cycle that actually moves the motor. The Motor::drive() method will then adjust the input from +/- 0-255 so that a value of 1 starts moving the motor.
+	 */
+	Motor(int pwmChannel, int in1, int in2, int pwm, int minPwmValue, int encoderA, int encoderB, int ticksPerRevolution);
+
+	/**
 	 * @brief Construct a new Motor object without encoder
 	 *
 	 * @param pwmChannel 0-15 Specifies the ledc channel used, has to be unique for every Motor object
@@ -39,6 +54,17 @@ public:
 	 * @param pwm GPIO Pin connected to PWM/EN/Enable on the Driver
 	 */
 	Motor(int pwmChannel, int in1, int in2, int pwm);
+
+	/**
+	 * @brief Construct a new Motor object without encoder
+	 *
+	 * @param pwmChannel 0-15 Specifies the ledc channel used, has to be unique for every Motor object
+	 * @param in1 GPIO Pin connected to IN1 on the Driver
+	 * @param in2 GPIO Pin connected to IN2 on the Driver
+	 * @param pwm GPIO Pin connected to PWM/EN/Enable on the Driver
+	 * @param minPwmValue The minimum pwm duty cycle that actually moves the motor. The Motor::drive() method will then adjust the input from +/- 0-255 so that a value of 1 starts moving the motor.
+	 */
+	Motor(int pwmChannel, int in1, int in2, int pwm, int minPwmValue);
 
 	/**
 	 * @brief Sets up the motor, has to be called once in the setup!
