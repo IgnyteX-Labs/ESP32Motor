@@ -1,0 +1,14 @@
+{
+	"name": "ESP32Motor",
+	"version": "0.0.1",
+	"description": "Simple Motor control library for esp32. Supports LN298n, TB6612FNG and similar boards.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/IgnyteX-Labs/ESP32Motor.git"
+	},
+	"authors": {
+		"name": "Veit Auckenthaler"
+	},
+	"license": "MIT",
+	"frameworks": "Arduino"
+}
