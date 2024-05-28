@@ -48,27 +48,21 @@ bool Motor::begin()
 
 void Motor::drive(int speed)
 {
-	if (speed < -255)
-	{
-		speed = 255;
-	}
-	else if (speed > 255)
-	{
-		speed = 255;
-	}
+	speed = constrain(speed, -255, 255);
 
 	if (speed == 0)
 	{
 		brake();
-	}
-	else if (speed > 0)
+	}else if (speed > 0)
 	{
+		speed = map(speed, 1, 255, minPwmValue, 255);
 		digitalWrite(IN1Pin, HIGH);
 		digitalWrite(IN2Pin, LOW);
 		ledcWrite(pwmChannel, speed);
 	}
 	else if (speed < 0)
 	{
+		speed = map(speed, -1, -255, -minPwmValue, -255);
 		digitalWrite(IN1Pin, LOW);
 		digitalWrite(IN2Pin, HIGH);
 		ledcWrite(pwmChannel, -speed);
